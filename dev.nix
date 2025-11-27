@@ -21,7 +21,10 @@
     # };
     workspace = {
       onCreate = {
-        sail-setup = "echo 'APP_PORT=8000' >> .env && echo \"alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'\" >> ~/.bashrc && ./vendor/bin/sail up -d";
+        sail = "echo 'APP_PORT=8000' >> .env && echo \"alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'\" >> ~/.bashrc && ./vendor/bin/sail build";
+      };
+      onStart = {
+        sail = "sail up -d && sail root-shell";
       };
     };
   };
