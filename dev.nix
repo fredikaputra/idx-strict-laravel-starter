@@ -13,11 +13,8 @@
       enable = true;
       previews = {
         web = {
-          command = ["composer" "run" "dev"];
+          command = ["php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0"];
           manager = "web";
-          env = {
-            PORT = "$PORT";
-          };
         };
       };
     };
