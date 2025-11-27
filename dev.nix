@@ -9,13 +9,18 @@
       "laravel.vscode-laravel"
       "bmewburn.vscode-intelephense-client"
     ];
-    previews = {
-      enable = true;
-      previews = {
-        web = {
-          command = ["php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0"];
-          manager = "web";
-        };
+    # previews = {
+    #   enable = true;
+    #   previews = {
+    #     web = {
+    #       command = ["php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0"];
+    #       manager = "web";
+    #     };
+    #   };
+    # };
+    workspace = {
+      onCreate = {
+        sail-up = "sail up -d";
       };
     };
   };
