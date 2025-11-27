@@ -14,10 +14,10 @@
             composer require laravel/sail
             php artisan sail:install --with mysql --devcontainer
             echo 'APP_PORT=8000' >> .env
-            cat << 'EOF' >> ~/.bashrc
+            cat << 'SCRIPT' > vendor/onCreate.sh
+cat << 'EOF' >> ~/.bashrc
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
-            cat << 'SCRIPT' > vendor/onCreate.sh
 ./vendor/bin/sail up -d
 docker exec -it laravel-starter-kit-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate"
 SCRIPT
