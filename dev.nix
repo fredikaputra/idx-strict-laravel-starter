@@ -21,7 +21,7 @@
     # };
     workspace = {
       onCreate = {
-        sail = "echo 'APP_PORT=8000' >> .env && echo \"alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'\" >> ~/.bashrc && ./vendor/bin/sail build";
+        setup = "./vendor/onCreate.sh";
       };
       onStart = {
         sail = "./vendor/bin/sail up";
