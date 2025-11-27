@@ -39,3 +39,9 @@ chown -R sail storage
 # Run migrations to set up the database
 php artisan migrate
 ```
+
+## ⚠️ Important Permissions Note
+
+After running the setup commands, you may not be able to edit files inside the `storage` directory directly in the editor due to the permission changes (`chown -R sail storage`).
+
+If you need to modify any files within the `storage` folder, you must do so by first entering the Docker container shell using `sail shell`.
