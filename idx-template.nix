@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, sail ? false }: {
   channel = "stable-25.05";
   packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest ];
   bootstrap = ''
