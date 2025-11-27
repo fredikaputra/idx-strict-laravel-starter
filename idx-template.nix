@@ -1,9 +1,9 @@
 { pkgs, ... }: {
+  packages = [ pkgs.php84 pkgs.php84.packages.composer ];
   bootstrap = ''
-    cp -rf ${./.} "$out"
-
-    chmod -R +w "$out"
-
-    rm -rf "$out/.git" "$out/idx-template".{nix,json}
+    composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
+    ls -la
+    echo '==='
+    ls -la "$out"
   '';
 }
