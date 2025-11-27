@@ -7,7 +7,5 @@
     cp ${./dev.nix} "$out"/.idx/dev.nix
     cd "$out"
     composer setup
-    npm install playwright
-    npx playwright install-deps
   '';
 }
