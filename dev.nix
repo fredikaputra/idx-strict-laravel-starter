@@ -20,7 +20,7 @@
     # };
     workspace = {
       onCreate = {
-        sail-alias = "echo \"alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'\" >> ~/.bashrc"
+        sail-alias = "echo \"alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'\" >> ~/.bashrc";
         sail-up = "./vendor/bin/sail up -d";
       };
     };
