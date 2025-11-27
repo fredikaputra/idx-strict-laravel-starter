@@ -4,6 +4,7 @@
     pkgs.php84
     pkgs.php84.packages.composer
   ];
+  services.docker.enable = true;
   idx = {
     extensions = [
       "laravel.vscode-laravel"
