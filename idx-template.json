@@ -1,6 +1,18 @@
 {
   "name": "Strict Laravel Starter Kit",
   "description": "A strict, standardized template for bootstrapping a new Laravel application using the nunomaduro/laravel-starter-kit in Firebase Studio.",
+  "categories": [
+    "Web",
+    "Backend"
+  ],
   "icon": "https://raw.githubusercontent.com/laravel/art/refs/heads/master/laravel-logo.svg",
-  "params": []
+  "params": [
+    {
+      "id": "sail",
+      "name": "Use sail?",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  ]
 }
