@@ -17,10 +17,12 @@
             PROJECT_NAME=$(basename "$out")
             cat << SCRIPT > vendor/onCreate.sh
 cat << 'EOF' >> ~/.bashrc
-alias sail='sh \$( [ -f sail ] && echo sail || echo vendor/bin/sail )'
+alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
 ./vendor/bin/sail up -d
+sleep 20
 docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate"
+rm vendor/onCreate.sh
 SCRIPT
             chmod u+x vendor/onCreate.sh
           )
