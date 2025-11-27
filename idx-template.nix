@@ -9,7 +9,7 @@
     ${
       if sail then
         "(
-          cd $out && composer require laravel/sail && php artisan sail:install --with mysql --devcontainer
+          cd $out && composer require laravel/sail && php artisan sail:install --with mysql --devcontainer && echo 'docker exec -it laravel-starter-kit-laravel.test-1 bash -c \"chown -R sail storage && php artisan migrate\"' > vendor/setup.sh && chmod u+x vendor/setup.sh
         )"
       else
         ""
