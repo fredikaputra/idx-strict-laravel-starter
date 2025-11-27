@@ -6,6 +6,8 @@
     mkdir "$out"/.idx
     cp ${./dev.nix} "$out"/.idx/dev.nix
     cd "$out"
-    npm install
+    composer setup
+    npm install playwright
+    npx playwright install-deps
   '';
 }
