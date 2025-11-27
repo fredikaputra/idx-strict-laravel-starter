@@ -5,7 +5,5 @@
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
     cp ${./dev.nix} "$out"/.idx/dev.nix
-    cd "$out"
-    composer setup
   '';
 }
