@@ -5,9 +5,6 @@
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
     cp ${./dev.nix} "$out"/.idx/dev.nix
-    ls -la
-    pwd
-    ls -la "$out"
-    npm install
+    npm install "$out"
   '';
 }
