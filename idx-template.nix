@@ -6,6 +6,8 @@
     mkdir "$out"/.idx
     cp ${./dev.nix} "$out"/.idx/dev.nix
     ls -la
+    pwd
+    ls -la "$out"
     npm install
   '';
 }
