@@ -22,7 +22,7 @@ alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
 ./vendor/bin/sail up -d
 sleep 20
-docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate && npm install playwright && npx playwright install && npx playwright install-deps && composer test"
+docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate && npm install playwright && npx playwright install && npx playwright install-deps && composer test && php artisan about"
 SCRIPT
             chmod u+x vendor/onCreate.sh
           )
