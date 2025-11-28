@@ -4,7 +4,7 @@
   bootstrap = ''
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
-    sail=${sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
+    sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
     chmod -R u+w "$out"
     ${
       if sail then
