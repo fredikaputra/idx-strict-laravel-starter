@@ -34,7 +34,7 @@
           ./vendor/bin/sail down -v
           docker image rm mysql/mysql-server
           ./vendor/bin/sail up -d
-          docker exec -it {{ project_name }}-laravel.test-1 bash -c "sleep 20 && chown -R sail storage && php artisan migrate:fresh --seed"
+          docker exec -it {{ PROJECT_NAME }}-laravel.test-1 bash -c "sleep 20 && chown -R sail storage && php artisan migrate:fresh --seed"
         '';
       };
     };
