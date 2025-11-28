@@ -1,10 +1,10 @@
 { pkgs, sail ? false }: {
   channel = "stable-25.05";
-  packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest ];
+  packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest pkgs.j2cli ];
   bootstrap = ''
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
-    cp ${./dev.nix} "$out"/.idx/dev.nix
+    sail=${sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
     chmod -R u+w "$out"
     ${
       if sail then
@@ -22,7 +22,7 @@ alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
 ./vendor/bin/sail up -d
 sleep 20
-docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate"
+docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate && npm install playwright && npx playwright install && npx playwright install-deps && composer test"
 SCRIPT
             chmod u+x vendor/onCreate.sh
           )
