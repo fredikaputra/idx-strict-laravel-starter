@@ -2,20 +2,22 @@
   channel = "stable-25.05";
   packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest pkgs.j2cli ];
   bootstrap = ''
+    PROJECT_NAME=$(basename "$out")
+
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
-    sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
-    npm install playwright
+    sail=${toString sail} j2 -D project_name="$PROJECT_NAME" ${./devNix.j2} -o "$out/.idx/dev.nix"
     chmod -R u+w "$out"
     ${
       if sail then
         ''
           (
             cd "$out"
+            npm install
             composer require laravel/sail
             php artisan sail:install --with mysql --devcontainer
+            sed -i "s|image: ['\"]*mysql/mysql-server:[^'\"[:space:]]*['\"]*|image: mysql/mysql-server|g" compose.yaml
             echo 'APP_PORT=8000' >> .env
-            PROJECT_NAME=$(basename "$out")
             cat << SCRIPT > vendor/onCreate.sh
 rm vendor/onCreate.sh
 cat << 'EOF' >> ~/.bashrc
@@ -23,7 +25,7 @@ alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
 ./vendor/bin/sail up -d
 sleep 20
-docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "chown -R sail storage && php artisan migrate && npx playwright install && composer test && php artisan about"
+docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "npx playwright install && php artisan about"
 SCRIPT
             chmod u+x vendor/onCreate.sh
           )
