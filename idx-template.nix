@@ -6,7 +6,7 @@
 
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
-    sail=${toString sail} j2 -D project_name="$PROJECT_NAME" ${./devNix.j2} -o "$out/.idx/dev.nix"
+    sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
     chmod -R u+w "$out"
     ${
       if sail then
