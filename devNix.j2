@@ -1,24 +1,31 @@
 { pkgs, ... }: {
   channel = "stable-25.05";
+  {%- if not sail %}
   packages = [
     pkgs.php84
     pkgs.php84.packages.composer
   ];
+  {%- endif %}
+  {%- if sail %}
   services.docker.enable = true;
+  {%- endif %}
   idx = {
     extensions = [
       "laravel.vscode-laravel"
       "bmewburn.vscode-intelephense-client"
     ];
-    # previews = {
-    #   enable = true;
-    #   previews = {
-    #     web = {
-    #       command = ["php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0"];
-    #       manager = "web";
-    #     };
-    #   };
-    # };
+    {%- if not sail %}
+    previews = {
+      enable = true;
+      previews = {
+        web = {
+          command = [ "php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0" ];
+          manager = "web";
+        };
+      };
+    };
+    {%- endif %}
+    {%- if sail %}
     workspace = {
       onCreate = {
         setup = "./vendor/onCreate.sh";
@@ -27,5 +34,6 @@
         sail = "./vendor/bin/sail up";
       };
     };
+    {%- endif %}
   };
 }
