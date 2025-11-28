@@ -2,8 +2,6 @@
   channel = "stable-25.05";
   packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest pkgs.j2cli ];
   bootstrap = ''
-    PROJECT_NAME=$(basename "$out")
-
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
     sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
@@ -25,7 +23,7 @@ alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
 EOF
 ./vendor/bin/sail up -d
 sleep 20
-docker exec -it $PROJECT_NAME-laravel.test-1 bash -c "npx playwright install && php artisan about"
+echo "npx playwright install && php artisan about" | ./vendor/bin/sail root-shell
 SCRIPT
             chmod u+x vendor/onCreate.sh
           )
