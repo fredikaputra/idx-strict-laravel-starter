@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  channel = "stable-25.05";
+{ {% if not sail %}pkgs{% endif %} }: {
   {%- if not sail %}
+  channel = "stable-25.05";
   packages = [
     pkgs.php84
     pkgs.php84.packages.composer
