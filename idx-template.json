@@ -11,7 +11,7 @@
       "id": "sail",
       "name": "Use sail?",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "required": false
     }
   ]
