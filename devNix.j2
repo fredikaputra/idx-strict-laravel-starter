@@ -30,7 +30,12 @@
         setup = "./vendor/onCreate.sh";
       };
       onStart = {
-        sail = "./vendor/bin/sail up";
+        sail = ''
+          ./vendor/bin/sail down -v
+          docker image rm mysql/mysql-server
+          ./vendor/bin/sail up -d
+          docker exec -it {{ project_name }}-laravel.test-1 bash -c "sleep 20 && chown -R sail storage && php artisan migrate:fresh --seed"
+        '';
       };
     };
     {%- endif %}
