@@ -1,12 +1,11 @@
-{ {% if not sail %}pkgs{% endif %} }: {
-  {%- if not sail %}
+{%- if not sail %}{ pkgs }: {
   channel = "stable-25.05";
   packages = [
     pkgs.php84
     pkgs.php84.packages.composer
   ];
   {%- endif %}
-  {%- if sail %}
+  {%- if sail %}{}: {
   services.docker.enable = true;
   {%- endif %}
   idx = {
