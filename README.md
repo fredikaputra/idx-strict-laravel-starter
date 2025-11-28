@@ -4,9 +4,7 @@ A strict, standardized template for bootstrapping a new Laravel application. Thi
 
 ## 🚀 Getting Started
 
-Since this repository is built to run seamlessly within Firebase Studio, the setup process is simplified.
-
-### 1. Open in Firebase Studio
+Simply click the button below to launch the template directly in Firebase Studio. The environment will load, and you can proceed with the Initial Setup steps.
 
 <a href="https://studio.firebase.google.com/new?template=https%3A%2F%2Fgithub.com%2Ffredikaputra%2Fidx-strict-laravel-starter">
   <picture>
@@ -23,25 +21,12 @@ Since this repository is built to run seamlessly within Firebase Studio, the set
   </picture>
 </a>
 
-### 2. Complete Initial Setup
-
-Once the workspace is loaded in Firebase Studio, you must run the following commands in the terminal to ensure file permissions are correct and the database is initialized:
-
-```sh
-# Enter the Sail environment shell
-sail root-shell
-```
-
-```sh
-# Fix file permissions for storage directory
-chown -R sail storage
-
-# Run migrations to set up the database
-php artisan migrate
-```
-
 ## ⚠️ Important Permissions Note
 
-After running the setup commands, you may not be able to edit files inside the `storage` directory directly in the editor due to the permission changes (`chown -R sail storage`).
+You **must always** interact with the Laravel environment and its files, particularly within the `storage` and other potentially permission-sensitive directories, by first entering the Docker container shell.
 
-If you need to modify any files within the `storage` folder, you must do so by first entering the Docker container shell using `sail shell`.
+To gain the necessary **root permissions** for file modification and administration inside the container, you must use the following command:
+
+```bash
+sail root-shell
+```
