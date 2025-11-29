@@ -32,7 +32,7 @@
       onStart = {
         sail = ''
           ./vendor/bin/sail down -v
-          docker image rm mysql/mysql-server
+          docker image rm IMAGE_PLACEHOLDER
           ./vendor/bin/sail up -d
           echo "sleep 20 && chown -R sail storage && php artisan migrate:fresh --seed" | ./vendor/bin/sail root-shell
         '';
