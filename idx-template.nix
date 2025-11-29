@@ -11,11 +11,15 @@
         ''
           (
             cd "$out"
+
+            IMAGE_VALUE=$(grep 'mysql/mysql-server' compose.yaml | grep -o "'.*'" | tr -d "'")
+            sed -i "s/IMAGE_PLACEHOLDER/$IMAGE_VALUE/g" .idx/dev.nix
+
             npm install
             composer require laravel/sail
             php artisan sail:install --with mysql --devcontainer
-            sed -i "s|image: ['\"]*mysql/mysql-server:[^'\"[:space:]]*['\"]*|image: mysql/mysql-server|g" compose.yaml
             echo 'APP_PORT=8000' >> .env
+
             cat << SCRIPT > vendor/onCreate.sh
 rm vendor/onCreate.sh
 cat << 'EOF' >> ~/.bashrc
