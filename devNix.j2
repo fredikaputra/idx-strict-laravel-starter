@@ -34,7 +34,10 @@
           ./vendor/bin/sail down -v
           docker image rm IMAGE_PLACEHOLDER
           ./vendor/bin/sail up -d
-          echo "sleep 20 && chown -R sail storage && php artisan migrate:fresh --seed" | ./vendor/bin/sail root-shell
+          echo 'Initializing database connection...'
+          echo "sleep 20 && chown -R sail storage bootstrap/cache && php artisan migrate:fresh --seed" | ./vendor/bin/sail root-shell
+          clear
+          exec ./vendor/bin/sail up
         '';
       };
     };
