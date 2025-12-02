@@ -37,7 +37,7 @@
           && echo 'Initializing database connection...' \
           && echo "sleep 20 && chown -R sail storage bootstrap/cache && php artisan migrate:fresh --seed" | ./vendor/bin/sail root-shell \
           && clear \
-          && exec ./vendor/bin/sail up
+          && ./vendor/bin/sail up
         '';
       };
     };
