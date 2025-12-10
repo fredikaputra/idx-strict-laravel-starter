@@ -16,20 +16,6 @@
             composer require laravel/sail
             php artisan sail:install --with mysql --devcontainer
             echo 'APP_PORT=8000' >> .env
-
-            IMAGE_VALUE=$(grep 'mysql/mysql-server' compose.yaml | grep -o "'.*'" | tr -d "'")
-            sed -i "s|IMAGE_PLACEHOLDER|$IMAGE_VALUE|g" .idx/dev.nix
-
-            cat << SCRIPT > vendor/onCreate.sh
-rm vendor/onCreate.sh
-cat << 'EOF' >> ~/.bashrc
-alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
-EOF
-./vendor/bin/sail up -d
-sleep 20
-echo "npx playwright install && php artisan about" | ./vendor/bin/sail root-shell
-SCRIPT
-            chmod u+x vendor/onCreate.sh
           )
         ''
       else
