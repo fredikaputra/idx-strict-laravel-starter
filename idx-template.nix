@@ -1,6 +1,6 @@
 { pkgs, sail ? false }: {
   channel = "stable-25.05";
-  packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.nodejs_latest pkgs.j2cli ];
+  packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.bun pkgs.j2cli ];
   bootstrap = ''
     composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
