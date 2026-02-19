@@ -2,7 +2,7 @@
   channel = "stable-25.05";
   packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.bun pkgs.j2cli ];
   bootstrap = ''
-    (composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out" || :)
+    composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
     mkdir "$out"/.idx
     sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
     chmod -R u+w "$out"
@@ -12,7 +12,7 @@
           (
             cd "$out"
 
-            npm install
+            bun install
             composer require laravel/sail
             php artisan sail:install --with mysql --devcontainer
             echo 'APP_PORT=8000' >> .env
