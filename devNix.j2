@@ -27,7 +27,9 @@
     {%- if sail %}
     workspace = {
       onCreate = {
-        setup = "./vendor/onCreate.sh";
+        setup = ''
+          echo "alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'" > ~/.bash_aliases
+        '';
       };
       onStart = {
         sail = ''

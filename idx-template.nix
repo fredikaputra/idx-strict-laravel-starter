@@ -19,17 +19,6 @@
 
             IMAGE_VALUE=$(grep 'image:.*mysql:' compose.yaml | grep -o "'.*'" | tr -d "'")
             sed -i "s|IMAGE_PLACEHOLDER|$IMAGE_VALUE|g" .idx/dev.nix
-
-            cat << SCRIPT > vendor/onCreate.sh
-rm vendor/onCreate.sh
-cat << 'EOF' >> ~/.bashrc
-alias sail='sh \$([ -f sail ] && echo sail || echo vendor/bin/sail)'
-EOF
-./vendor/bin/sail up -d
-sleep 20
-echo "bunx playwright install && php artisan about" | ./vendor/bin/sail root-shell
-SCRIPT
-            chmod u+x vendor/onCreate.sh
           )
         ''
       else
