@@ -2,7 +2,8 @@
   channel = "stable-25.05";
   packages = [
     pkgs.php84
-    pkgs.php84.packages.composer
+    pkgs.php84Packages.composer
+    pkgs.bun
   ];
   idx = {
     extensions = [
