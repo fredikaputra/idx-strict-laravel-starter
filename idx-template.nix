@@ -4,6 +4,7 @@
       pkgs.php84
       pkgs.php84Packages.composer
       pkgs.bun
+      pkgs.j2cli
     ];
 
     bootstrap = ''
