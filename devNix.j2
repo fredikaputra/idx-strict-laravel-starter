@@ -1,19 +1,14 @@
-{%- if not sail %}{ pkgs }: {
+{ pkgs }: {
   channel = "stable-25.05";
   packages = [
     pkgs.php84
     pkgs.php84.packages.composer
   ];
-  {%- endif %}
-  {%- if sail %}{}: {
-  services.docker.enable = true;
-  {%- endif %}
   idx = {
     extensions = [
       "laravel.vscode-laravel"
       "bmewburn.vscode-intelephense-client"
     ];
-    {%- if not sail %}
     previews = {
       enable = true;
       previews = {
@@ -23,26 +18,5 @@
         };
       };
     };
-    {%- endif %}
-    {%- if sail %}
-    workspace = {
-      onCreate = {
-        setup = ''
-          echo 'alias sail="sh $([ -f sail ] && echo sail || echo vendor/bin/sail)"' > ~/.bash_aliases
-        '';
-      };
-      onStart = {
-        sail = ''
-          ./vendor/bin/sail down -v
-          docker image rm IMAGE_PLACEHOLDER
-          ./vendor/bin/sail up -d
-          echo 'Initializing database connection...'
-          echo "sleep 20 && chown -R sail storage bootstrap/cache && php artisan migrate:fresh --seed" | ./vendor/bin/sail root-shell
-          clear
-          ./vendor/bin/sail up
-        '';
-      };
-    };
-    {%- endif %}
   };
 }

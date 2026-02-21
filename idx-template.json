@@ -11,16 +11,16 @@
       "id": "kit",
       "name": "Starter Kit",
       "type": "enum",
-      "default": "blade-kit",
+      "default": "blade",
       "options": {
-        "livewire-kit": "Livewire Starter Kit",
-        "blade-kit": "Blade Starter Kit",
-        "blade-strict-kit": "Blade Starter Kit (Strict)",
-        "react-kit": "React Starter Kit",
-        "react-strict-kit": "React Starter Kit (Strict)",
-        "vue-kit": "Vue Starter Kit",
-        "vue-strict-kit": "Vue Starter Kit (Strict)",
-        "svelte-kit": "Svelte Starter Kit"
+        "livewire": "Livewire Starter Kit",
+        "blade": "Blade Starter Kit",
+        "blade-strict": "Blade Starter Kit (Strict)",
+        "react": "React Starter Kit",
+        "react-strict": "React Starter Kit (Strict)",
+        "vue": "Vue Starter Kit",
+        "vue-strict": "Vue Starter Kit (Strict)",
+        "svelte": "Svelte Starter Kit"
       }
     }
   ]
