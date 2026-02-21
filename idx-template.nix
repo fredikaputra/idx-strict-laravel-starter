@@ -1,28 +1,15 @@
-{ pkgs, sail ? false }: {
-  channel = "stable-25.05";
-  packages = [ pkgs.php84 pkgs.php84.packages.composer pkgs.bun pkgs.j2cli ];
-  bootstrap = ''
-    composer create-project nunomaduro/laravel-starter-kit --prefer-dist "$out"
-    mkdir "$out"/.idx
-    sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
-    chmod -R u+w "$out"
-    ${
-      if sail then
-        ''
-          (
-            cd "$out"
+{ pkgs, kit ? "blade-kit", ... }: {
+    channel = "stable-25.05";
+    packages = [
+      pkgs.php84
+      pkgs.php84Packages.composer
+      pkgs.bun
+    ];
 
-            bun install
-            composer require laravel/sail
-            php artisan sail:install --with mysql --devcontainer
-            echo 'APP_PORT=8000' >> .env
-
-            IMAGE_VALUE=$(grep 'image:.*mysql:' compose.yaml | grep -o "'.*'" | tr -d "'")
-            sed -i "s|IMAGE_PLACEHOLDER|$IMAGE_VALUE|g" .idx/dev.nix
-          )
-        ''
-      else
-        ""
-    }
-  '';
+    bootstrap = ''
+      composer create-project laravel/laravel "$out" --remove-vcs --prefer-dist --no-scripts
+			mkdir "$out"/.idx
+      sail=${toString sail} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
+      chmod -R u+w "$out"
+    '';
 }

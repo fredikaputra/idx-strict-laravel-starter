@@ -6,7 +6,7 @@ A strict, standardized template for bootstrapping a new Laravel application. Thi
 
 Simply click the button below to launch the template directly in Firebase Studio. The environment will load, and you can proceed with the Initial Setup steps.
 
-<a href="https://studio.firebase.google.com/new?template=https%3A%2F%2Fgithub.com%2Ffredikaputra%2Fidx-strict-laravel-starter">
+<a href="https://studio.firebase.google.com/new?template=https%3A%2F%2Fgithub.com%2Ffredikaputra%2Fidx-laravel">
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
