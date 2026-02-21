@@ -19,6 +19,7 @@
         else ''
           (
             composer create-project laravel/laravel "$out" --remove-vcs --prefer-dist --no-scripts
+            cd "$out"
             cp .env.example .env
             touch database/database.sqlite
             php artisan key:generate

@@ -1,6 +1,20 @@
-# IDX Strict Laravel Starter
+# IDX Laravel Starter: Multi-Flavor Edition
 
-A strict, standardized template for bootstrapping a new Laravel application. This repository combines the **ultra-strict, type-safe architecture** of the [nunomaduro/laravel-starter-kit](https://github.com/nunomaduro/laravel-starter-kit) with the streamlined development experience of **Firebase Studio**, leveraging **Nix** for a fully reproducible and dependency-free environment.
+A standardized, Nix-powered template for bootstrapping Laravel applications in Firebase Studio. This repository goes beyond a basic install, offering a variety of starter kits—from standard Laravel setups to the ultra-strict, type-safe architecture championed by Nuno Maduro.
+
+## ⚡ Supported Starter Kits
+The environment automatically detects your choice and provisions the correct architecture using Nix. Choose your flavor:
+
+| Stack | Type | Source Package |
+| :--- | :--- | :--- |
+| **Blade** | **Strict** | `nunomaduro/laravel-starter-kit` |
+| **React** | **Strict** | `nunomaduro/laravel-starter-kit-inertia-react` |
+| **Vue** | **Strict** | `nunomaduro/laravel-starter-kit-inertia-vue` |
+| **Livewire** | Standard | `laravel/blank-livewire-starter-kit` |
+| **React** | Standard | `laravel/blank-react-starter-kit` |
+| **Vue** | Standard | `laravel/blank-vue-starter-kit` |
+| **Svelte** | Standard | `laravel/blank-svelte-starter-kit` |
+| **Laravel Core** | Default | `laravel/laravel` |
 
 ## 🚀 Getting Started
 
@@ -20,13 +34,3 @@ Simply click the button below to launch the template directly in Firebase Studio
       src="https://cdn.firebasestudio.dev/btn/open_blue_32.svg">
   </picture>
 </a>
-
-## ⚠️ Important Permissions Note
-
-You **must always** interact with the Laravel environment and its files, particularly within the `storage` and other potentially permission-sensitive directories, by first entering the Docker container shell.
-
-To gain the necessary **root permissions** for file modification and administration inside the container, you must use the following command:
-
-```bash
-sail root-shell
-```
