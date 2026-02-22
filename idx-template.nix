@@ -29,6 +29,8 @@
       echo "HMR_PORT=443" >> .env.example
       echo "HMR_PROTOCOL=wss" >> .env.example
 
+      cp .env.example .env
+
       cat <<EOF > patch-vite.ts
       import { readFileSync, writeFileSync } from "fs";
 
