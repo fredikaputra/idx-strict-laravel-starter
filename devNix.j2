@@ -1,17 +1,17 @@
 { pkgs }: {
   channel = "stable-25.05";
-  packages = [
-    pkgs.php84
-    pkgs.php84Packages.composer
-    pkgs.bun
-  ];
+  packages = [ pkgs.bun ];
   idx = {
     extensions = [
       "laravel.vscode-laravel"
       "bmewburn.vscode-intelephense-client"
       "bradlc.vscode-tailwindcss"
     ];
-    workspace.onCreate.prepare = "composer setup";
+    workspace.onCreate.prepare = ''
+      /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
+      source /home/user/.profile
+      composer setup
+    '';
     previews = {
       enable = true;
       previews = {

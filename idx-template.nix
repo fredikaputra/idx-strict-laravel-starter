@@ -1,14 +1,15 @@
 { pkgs, kit ? "blade-kit", ... }: {
     channel = "stable-25.05";
     packages = [
-      pkgs.php84
-      pkgs.php84Packages.composer
       pkgs.nodejs_latest
       pkgs.bun
       pkgs.j2cli
     ];
 
     bootstrap = ''
+      /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
+      source /home/user/.profile
+
       ${
         if kit == "livewire" then "composer create-project laravel/blank-livewire-starter-kit \"$out\" --stability=dev"
         else if kit == "blade-strict" then "composer create-project nunomaduro/laravel-starter-kit --prefer-dist \"$out\""
