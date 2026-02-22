@@ -6,6 +6,7 @@
       pkgs.j2cli
       pkgs.curl
       pkgs.ncurses
+      pkgs.debianutils
     ];
 
     bootstrap = ''
