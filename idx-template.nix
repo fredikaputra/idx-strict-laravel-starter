@@ -32,19 +32,26 @@
       cp .env.example .env
 
       cat <<EOF > patch-vite.ts
-      import { readFileSync, writeFileSync } from "fs";
+      import { readFileSync, writeFileSync, existsSync } from "fs";
 
-      let content = readFileSync("vite.config.js", "utf-8");
+      const fileName = existsSync("vite.config.ts") ? "vite.config.ts" : "vite.config.js";
+      
+      if (!existsSync(fileName)) {
+          console.error("Could not find vite.config.js or .ts");
+          process.exit(0); // Exit gracefully if neither exists
+      }
+
+      let content = readFileSync(fileName, "utf-8");
 
       if (!content.includes("process.loadEnvFile();")) {
           content = content.replace("export default defineConfig({", "process.loadEnvFile();\\n\\nexport default defineConfig({");
       }
 
       const hmrBlock = "        hmr: {\\n" +
-                      "            host: process.env.HMR_HOST,\\n" +
-                      "            clientPort: parseInt(process.env.HMR_PORT || \'\'),\\n" +
-                      "            protocol: process.env.HMR_PROTOCOL,\\n" +
-                      "        },";
+                       "            host: process.env.HMR_HOST,\\n" +
+                       "            clientPort: parseInt(process.env.HMR_PORT || \'\'),\\n" +
+                       "            protocol: process.env.HMR_PROTOCOL,\\n" +
+                       "        },";
 
       const fullServerBlock = "    server: {\\n" + hmrBlock + "\\n    },";
 
@@ -56,7 +63,7 @@
           });
       }
 
-      writeFileSync("vite.config.js", content);
+      writeFileSync(fileName, content);
       EOF
 
       bun patch-vite.ts
