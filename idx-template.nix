@@ -35,7 +35,7 @@
       sed -i "/server: {/a \
         hmr: {\
             host: process.env.HMR_HOST,\
-            clientPort: parseInt(process.env.HMR_PORT || ""),\
+            clientPort: parseInt(process.env.HMR_PORT || \"\"),\
             protocol: process.env.HMR_PROTOCOL,\
         }," vite.config.js
     '';
