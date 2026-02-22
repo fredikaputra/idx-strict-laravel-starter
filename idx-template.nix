@@ -23,19 +23,19 @@
       j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
       chmod -R u+w "$out"
 
-      echo '' >> .env.example
+      echo "" >> .env.example
       echo "HMR_HOST=" >> .env.example
       echo "HMR_PORT=443" >> .env.example
       echo "HMR_PROTOCOL=wss" >> .env.example
-      echo '' >> .env.example
+      echo "" >> .env.example
 
-      sed -i '/export default defineConfig({/i process.loadEnvFile();\n' vite.config.js
+      sed -i "/export default defineConfig({/i process.loadEnvFile();\n" vite.config.js
 
-      sed -i '/server: {/a \
+      sed -i "/server: {/a \
         hmr: {\
             host: process.env.HMR_HOST,\
             clientPort: parseInt(process.env.HMR_PORT || ""),\
             protocol: process.env.HMR_PROTOCOL,\
-        },' vite.config.js
+        }," vite.config.js
     '';
 }
