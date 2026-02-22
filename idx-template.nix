@@ -5,13 +5,13 @@
       pkgs.bun
       pkgs.j2cli
       pkgs.curl
-      pkgs.ncurses
-      pkgs.debianutils
     ];
 
     bootstrap = ''
-      which clear
-      echo "okokokokokoko"
+      echo "#!/bin/sh" > clear
+      chmod +x clear
+      export PATH="$PWD:$PATH"
+
       /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
       source /home/user/.profile
 
