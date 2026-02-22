@@ -13,7 +13,7 @@
       export PATH="$PWD:$PATH"
 
       /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
-      source /home/user/.profile
+      export PATH="/home/user/.config/herd-lite/bin:$PATH"
 
       ${
         if kit == "livewire" then "composer create-project laravel/blank-livewire-starter-kit \"$out\" --stability=dev"
