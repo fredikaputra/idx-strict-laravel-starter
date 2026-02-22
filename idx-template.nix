@@ -21,7 +21,8 @@
 
       mkdir -p "$out"/.idx
       j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
-      chmod -R u+w "$out"
+      
+      cd "$out"
 
       echo "" >> .env.example
       echo "HMR_HOST=" >> .env.example
