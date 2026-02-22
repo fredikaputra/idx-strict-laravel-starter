@@ -9,6 +9,8 @@
     ];
 
     bootstrap = ''
+      which clear
+      echo "okokokokokoko"
       /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
       source /home/user/.profile
 
