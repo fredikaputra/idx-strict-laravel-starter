@@ -57,7 +57,7 @@ HMR_PORT=443
 HMR_PROTOCOL=wss
 ```
 
-> *Note*: When copying the host from the Backend Ports tab, ensure you omit the https:// prefix and any trailing slashes.
+> *Note*: When copying the host from the Backend Ports tab, ensure you omit the `https://` prefix and any trailing slashes.
 
 ### Restart the Dev Server
 
