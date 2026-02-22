@@ -1,6 +1,6 @@
-# IDX Laravel Starter: Multi-Flavor Edition
+# IDX Laravel
 
-A standardized, Nix-powered template for bootstrapping Laravel applications in Firebase Studio. This repository goes beyond a basic install, offering a variety of starter kits—from standard Laravel setups to the ultra-strict, type-safe architecture championed by Nuno Maduro.
+This is a simple, ready-to-go template for building Laravel apps inside Firebase Studio.
 
 ## ⚡ Supported Starter Kits
 
@@ -38,32 +38,17 @@ Simply click the button below to launch the template directly in Firebase Studio
 
 ## 🛠️ How to Setup Vite Server
 
-To ensure Hot Module Replacement (HMR) works correctly within the cloud environment, update your vite.config.js to utilize environment variables for the dev server connection:
+To get Hot Module Replacement (HMR) working in the cloud, you just need to link your environment to the public port.
 
-```js
-import { defineConfig } from 'vite';
-// ... other imports
-
-process.loadEnvFile(); // <--- ADD THIS
-
-export default defineConfig({
-    // ... other configurations
-    server: {
-        // ... other server configs
-        hmr: {
-            host: process.env.HMR_HOST,
-            clientPort: parseInt(process.env.HMR_PORT || ""),
-            protocol: process.env.HMR_PROTOCOL,
-        },
-    },
-});
-```
-
-### Environment Configuration
+### Make the Port Public
 
 1. Open the Backend Ports tab in Firebase Studio.
-1. Locate port 5173 and change its visibility to Public.
-1. Add the following variables to your .env file, copying the host from that same tab:
+1. Find port 5173 (Vite).
+1. Change its visibility from Private to Public.
+
+### Update your .env
+
+Copy the Host address from that same tab (it looks like a long URL) and add these lines to your .env file:
 
 ```env
 # Get HMR_HOST from Firebase Studio "Backend Ports" tab (for port 5173)
