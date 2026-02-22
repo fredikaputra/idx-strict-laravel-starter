@@ -29,7 +29,33 @@
       echo "HMR_PORT=443" >> .env.example
       echo "HMR_PROTOCOL=wss" >> .env.example
 
-      sed -i "/export default defineConfig({/i process.loadEnvFile();\n" vite.config.js
-      sed -i "s/server: {/server: {\n        hmr: {\n            host: process.env.HMR_HOST,\n            clientPort: parseInt(process.env.HMR_PORT || \"\"),\n            protocol: process.env.HMR_PROTOCOL,\n        },/" vite.config.js
+      cat <<EOF > patch-vite.ts
+      import { readFileSync, writeFileSync } from "fs";
+
+      let content = readFileSync("vite.config.js", "utf-8");
+
+      if (!content.includes("process.loadEnvFile();")) {
+          content = "process.loadEnvFile();\\n" + content;
+      }
+
+      const hmrConfig = \`hmr: {
+            host: process.env.HMR_HOST,
+            clientPort: parseInt(process.env.HMR_PORT || ""),\\
+            protocol: process.env.HMR_PROTOCOL,
+        },\`;
+
+      if (content.includes("server: {")) {
+          content = content.replace("server: {", "server: {\\n        " + hmrConfig);
+      } else {
+          content = content.replace(/plugins: \\[[\\s\\S]*?\\],/, (match) => {
+              return match + "\\n    server: {\\n        " + hmrConfig + "\\n    },";
+          });
+      }
+
+      writeFileSync("vite.config.js", content);
+      EOF
+
+      bun patch-vite.ts
+      rm patch-vite.ts
     '';
 }
