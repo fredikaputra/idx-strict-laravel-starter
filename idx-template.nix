@@ -4,6 +4,7 @@
       pkgs.nodejs_latest
       pkgs.bun
       pkgs.j2cli
+      pkgs.curl
     ];
 
     bootstrap = ''
