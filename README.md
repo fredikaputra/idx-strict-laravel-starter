@@ -58,3 +58,10 @@ HMR_PROTOCOL=wss
 ```
 
 > *Note*: When copying the host from the Backend Ports tab, ensure you omit the https:// prefix and any trailing slashes.
+
+### Restart the Preview
+
+Once your .env is saved, you must restart the dev server to apply the changes:
+
+1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
+1. Search for and select: `FirebaseStudio: Hard Restart Previews`.

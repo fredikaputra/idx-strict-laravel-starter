@@ -28,15 +28,8 @@
       echo "HMR_HOST=" >> .env.example
       echo "HMR_PORT=443" >> .env.example
       echo "HMR_PROTOCOL=wss" >> .env.example
-      echo "" >> .env.example
 
       sed -i "/export default defineConfig({/i process.loadEnvFile();\n" vite.config.js
-
-      sed -i "/server: {/a \
-        hmr: {\
-            host: process.env.HMR_HOST,\
-            clientPort: parseInt(process.env.HMR_PORT || \"\"),\
-            protocol: process.env.HMR_PROTOCOL,\
-        }," vite.config.js
+      sed -i "s/server: {/server: {\n        hmr: {\n            host: process.env.HMR_HOST,\n            clientPort: parseInt(process.env.HMR_PORT || \"\"),\n            protocol: process.env.HMR_PROTOCOL,\n        },/" vite.config.js
     '';
 }
