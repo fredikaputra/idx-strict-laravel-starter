@@ -3,6 +3,7 @@
     packages = [
       pkgs.php84
       pkgs.php84Packages.composer
+      pkgs.nodejs_latest
       pkgs.bun
       pkgs.j2cli
     ];
