@@ -5,6 +5,7 @@
       pkgs.bun
       pkgs.j2cli
       pkgs.curl
+      pkgs.ncurses
     ];
 
     bootstrap = ''
