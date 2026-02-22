@@ -9,7 +9,7 @@
     ];
     workspace.onCreate.prepare = ''
       /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
-      source /home/user/.profile
+      source /home/user/.bashrc
       composer setup
     '';
     previews = {
