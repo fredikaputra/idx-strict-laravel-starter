@@ -7,35 +7,11 @@
       "bmewburn.vscode-intelephense-client"
       "bradlc.vscode-tailwindcss"
     ];
-    workspace.onCreate.prepare = ''
+    workspace.onCreate.setup = ''
       /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
       export PATH="$HOME/.config/herd-lite/bin:$PATH"
       composer setup
     '';
-    previews = {
-      enable = true;
-      previews = {
-        vite = {
-          command = [ "bun" "dev" ];
-          manager = "web";
-        };
-        web = {
-          command = [ "php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0" ];
-          manager = "web";
-        };
-        queue = {
-          command = [ "php" "artisan" "queue:listen" ];
-          manager = "web";
-        };
-        schedule = {
-          command = [ "php" "artisan" "schedule:work" ];
-          manager = "web";
-        };
-        log = {
-          command = [ "php" "artisan" "pail" ];
-          manager = "web";
-        };
-      };
-    };
+    workspace.onStart.dev = "composer dev";
   };
 }

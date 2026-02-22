@@ -59,9 +59,13 @@ HMR_PROTOCOL=wss
 
 > *Note*: When copying the host from the Backend Ports tab, ensure you omit the https:// prefix and any trailing slashes.
 
-### Restart the Preview
+### Restart the Dev Server
 
-Once your .env is saved, you must restart the dev server to apply the changes:
+After saving your .env changes, you must restart the development process to apply them:
 
-1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
-1. Search for and select: `FirebaseStudio: Hard Restart Previews`.
+1. In your terminal, press Ctrl + C to stop the current process.
+1. Re-run the development command:
+
+    ```bash
+    composer dev
+    ```
