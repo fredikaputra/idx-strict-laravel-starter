@@ -35,20 +35,22 @@
       let content = readFileSync("vite.config.js", "utf-8");
 
       if (!content.includes("process.loadEnvFile();")) {
-          content = "process.loadEnvFile();\\n" + content;
+          content = content.replace("export default defineConfig({", "process.loadEnvFile();\\n\\nexport default defineConfig({");
       }
 
-      const hmrConfig = \`hmr: {
-            host: process.env.HMR_HOST,
-            clientPort: parseInt(process.env.HMR_PORT || ""),\\
-            protocol: process.env.HMR_PROTOCOL,
-        },\`;
+      const hmrBlock = "        hmr: {\\n" +
+                      "            host: process.env.HMR_HOST,\\n" +
+                      "            clientPort: parseInt(process.env.HMR_PORT || \'\'),\\n" +
+                      "            protocol: process.env.HMR_PROTOCOL,\\n" +
+                      "        },";
+
+      const fullServerBlock = "    server: {\\n" + hmrBlock + "\\n    },";
 
       if (content.includes("server: {")) {
-          content = content.replace("server: {", "server: {\\n        " + hmrConfig);
+          content = content.replace("server: {", "server: {\\n" + hmrBlock);
       } else {
-          content = content.replace(/plugins: \\[[\\s\\S]*?\\],/, (match) => {
-              return match + "\\n    server: {\\n        " + hmrConfig + "\\n    },";
+          content = content.replace(/\\}\\);\\s*$/, (match) => {
+              return fullServerBlock + "\\n" + match;
           });
       }
 
