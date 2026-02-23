@@ -43,10 +43,8 @@
       "bradlc.vscode-tailwindcss"
     ];
     workspace.onCreate.setup = ''
-      if [ -n "''${WEB_HOST-}" ]; then
-        sed -i "s|^APP_URL=.*|APP_URL=https://9000-$WEB_HOST|" .env
-        sed -i "s|^HMR_HOST=.*|HMR_HOST=5173-$WEB_HOST|" .env
-      fi
+      sed -i "s|^APP_URL=.*|APP_URL=https://9000-$WEB_HOST|" .env
+      sed -i "s|^HMR_HOST=.*|HMR_HOST=5173-$WEB_HOST|" .env
       composer setup
     '';
     previews = {

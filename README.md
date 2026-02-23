@@ -38,34 +38,6 @@ Simply click the button below to launch the template directly in Firebase Studio
 
 ## 🛠️ How to Setup Vite Server
 
-To get Hot Module Replacement (HMR) working in the cloud, you just need to link your environment to the public port.
-
-### Make the Port Public
-
-1. Open the Backend Ports tab in Firebase Studio.
-1. Find port 5173 (Vite).
-1. Change its visibility from Private to Public.
-
-### Update your .env
-
-Copy the Host address from that same tab (it looks like a long URL) and add these lines to your .env file:
-
-```env
-# Get HMR_HOST from Firebase Studio "Backend Ports" tab (for port 5173)
-HMR_HOST=your-unique-studio-id.cloudworkstations.dev
-HMR_PORT=443
-HMR_PROTOCOL=wss
-```
-
-> *Note*: When copying the host from the Backend Ports tab, ensure you omit the `https://` prefix and any trailing slashes.
-
-### Restart the Dev Server
-
-After saving your .env changes, you must restart the development process to apply them:
-
-1. In your terminal, press Ctrl + C to stop the current process.
-1. Re-run the development command:
-
-    ```bash
-    composer dev
-    ```
+1. Open the **Backend Ports** tab in Firebase Studio.
+2. Find port **5173** (Vite).
+3. Change its visibility from **Private** to **Public**.
