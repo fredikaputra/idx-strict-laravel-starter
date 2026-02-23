@@ -1,6 +1,29 @@
 { pkgs }: {
   channel = "stable-25.05";
   packages = [
+    # pkgs.playwright-driver.browsers 
+    # pkgs.systemd 
+    # pkgs.glib
+    # pkgs.nss
+    # pkgs.nspr
+    # pkgs.atk
+    # pkgs.at-spi2-atk
+    # pkgs.libdrm
+    # pkgs.expat
+    # pkgs.libgbm
+    # pkgs.xorg.libxcb
+    # pkgs.xorg.libX11
+    # pkgs.xorg.libXcomposite
+    # pkgs.xorg.libXdamage
+    # pkgs.xorg.libXext
+    # pkgs.xorg.libXfixes
+    # pkgs.xorg.libXrandr
+    # pkgs.mesa
+    # pkgs.alsa-lib
+    # pkgs.pango
+    # pkgs.cairo
+    # pkgs.dbus
+    # pkgs.libxkbcommon
     pkgs.bun
     pkgs.php84Packages.composer
     (pkgs.php84.buildEnv {
@@ -46,6 +69,7 @@
       sed -i "s|^APP_URL=.*|APP_URL=https://9000-$WEB_HOST|" .env
       sed -i "s|^HMR_HOST=.*|HMR_HOST=5173-$WEB_HOST|" .env
       composer setup
+      bunx playwright install
     '';
     previews = {
       enable = true;
