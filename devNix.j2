@@ -1,17 +1,44 @@
 { pkgs }: {
   channel = "stable-25.05";
-  packages = [ pkgs.bun ];
+  packages = [
+    pkgs.bun
+    pkgs.php84Packages.composer
+    (pkgs.php84.buildEnv {
+      extensions = ({ enabled, all }: enabled ++ (with all; [
+        xdebug
+      ]));
+      extraConfig = ''
+        xdebug.mode=debug,coverage
+      '';
+    })
+  ];
   idx = {
     extensions = [
       "laravel.vscode-laravel"
       "bmewburn.vscode-intelephense-client"
       "bradlc.vscode-tailwindcss"
     ];
-    workspace.onCreate.setup = ''
-      /bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
-      export PATH="$HOME/.config/herd-lite/bin:$PATH"
-      composer setup
-    '';
-    workspace.onStart.dev = "composer dev";
+    workspace.onCreate.setup = "composer setup";
+    previews = {
+      enable = true;
+      previews = {
+        vite = {
+          command = [ "bun" "dev" ];
+          manager = "web";
+        };
+        web = {
+          command = [ "php" "artisan" "serve" "--port" "$PORT" "--host" "0.0.0.0" ];
+          manager = "web";
+        };
+        queue = {
+          command = [ "php" "artisan" "queue:listen" ];
+          manager = "web";
+        };
+        schedule = {
+          command = [ "php" "artisan" "schedule:work" ];
+          manager = "web";
+        };
+      };
+    };
   };
 }
