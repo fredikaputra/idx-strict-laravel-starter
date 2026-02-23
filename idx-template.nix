@@ -41,6 +41,7 @@
       cp .env.example .env
 
       composer setup
+      composer update
 
       cat <<EOF > patch-vite.ts
       import { readFileSync, writeFileSync, existsSync } from "fs";

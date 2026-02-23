@@ -1,7 +1,6 @@
 { pkgs }: {
   channel = "stable-25.05";
   packages = [
-    pkgs.playwright-driver.browsers
     pkgs.systemd
     pkgs.glib
     pkgs.nspr
@@ -64,6 +63,7 @@
       sed -i "s|^APP_URL=.*|APP_URL=https://9000-$WEB_HOST|" .env
       sed -i "s|^HMR_HOST=.*|HMR_HOST=5173-$WEB_HOST|" .env
       composer setup
+      bunx playwright install
     '';
     previews = {
       enable = true;
