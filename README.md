@@ -36,8 +36,17 @@ Simply click the button below to launch the template directly in Firebase Studio
   </picture>
 </a>
 
-## 🛠️ How to Setup Vite Server
+## 🛠️ Network Configuration (Crucial)
+To ensure the environment functions correctly, you must adjust the port visibility in the **Backend Ports** tab:
 
-1. Open the **Backend Ports** tab in Firebase Studio.
-2. Find port **5173** (Vite).
-3. Change its visibility from **Private** to **Public**.
+1. **Vite Development Server**
+
+- Port: `5173`
+- Visibility: Change from Private to Public.
+- Reason: Allows your browser to load hot-reloaded assets and CSS.
+
+2. **Laravel Development Server**
+
+- Port: `9000`
+- Visibility: Change from Private to Public.
+- Reason: The headless browser runner requires a public tunnel to access the application. If this is set to private, tests will fail.
