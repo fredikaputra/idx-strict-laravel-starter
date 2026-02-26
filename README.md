@@ -50,3 +50,19 @@ To ensure the environment functions correctly, you must adjust the port visibili
 - Port: `9000`
 - Visibility: Change from Private to Public.
 - Reason: The headless browser runner requires a public tunnel to access the application. If this is set to private, tests will fail.
+
+## 🧪 Browser Testing (Pest)
+
+If you want to run browser-based tests, there are two important requirements for the IDX environment:
+
+1. **Virtual Display:** Because the environment is headless, you must prepend your test commands with `xvfb-run` (e.g., `xvfb-run php artisan test`).
+2. **Asset Preparation:** Ensure your assets are already built (`bun run build`) and use those static builds instead of running `bun run dev`.
+
+### ⚡ The Shortcut (Recommended)
+To make testing comfortable and easy to run, a custom alias has been configured. You can execute everything described above by simply running:
+
+```bash
+test
+```
+
+> This alias is stored in `~/.bash_aliases`.
