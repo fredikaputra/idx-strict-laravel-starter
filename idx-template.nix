@@ -7,6 +7,7 @@
       pkgs.curl
     ];
     bootstrap = ''
+      export kit="${kit}"
       cp -rf ${./.}/* .
       ./bootstrap.sh
     '';

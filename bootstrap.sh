@@ -52,4 +52,3 @@ cp .env.example .env
 sed -i 's/\("php": "[^0-9]*\)8\.[0-9]\+/\18.4/' composer.json
 composer setup
 composer update
-
