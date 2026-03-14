@@ -70,4 +70,4 @@ if [[ "$kit" != "wave" ]]; then
     composer update
 fi
 
-[[ $kit == "filament" ]] && composer require filament/filament && php artisan filament:install --panels
+# [[ $kit == "filament" ]] && composer require filament/filament && php artisan filament:install --panels
