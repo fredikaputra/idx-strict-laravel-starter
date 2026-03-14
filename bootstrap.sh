@@ -65,9 +65,9 @@ fi
 
 cp .env.example .env
 
-composer setup
 if [[ "$kit" != "wave" ]]; then
     sed -i 's/\("php": "[^0-9]*\)8\.[0-9]\+/\18.4/' composer.json
+    composer setup
     composer update
 fi
 
