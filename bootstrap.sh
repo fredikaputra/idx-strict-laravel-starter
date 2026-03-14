@@ -33,7 +33,7 @@ case "$kit" in
         git clone --depth 1 https://github.com/juststeveking/kit "$out" && rm -rf "$out/.git"
         ;;
     "wave")
-        curl -LO https://devdojo.com/wave/download && unzip download "$out"
+        curl -LO https://devdojo.com/wave/download && unzip download -d "$out"
         ;;
     *)
         composer create-project laravel/laravel "$out" --remove-vcs --prefer-dist --no-scripts
