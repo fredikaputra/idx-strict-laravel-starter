@@ -32,9 +32,6 @@ case "$kit" in
     "api")
         git clone --depth 1 https://github.com/juststeveking/kit "$out" && rm -rf "$out/.git"
         ;;
-    "filament")
-        composer create-project laravel/laravel "$out" --remove-vcs --prefer-dist --no-scripts && cd "$out" && composer require filament/filament && php artisan filament:install --panels && cd ..
-        ;;
     "wave")
         curl -LO https://devdojo.com/wave/download && unzip download "$out"
         ;;
@@ -43,6 +40,9 @@ case "$kit" in
         ;;
 esac
 
+pwd
+ls -la
+
 mkdir -p "$out/.idx"
 cp setup.sh "$out/.idx/"
 j2 ./devNix.j2 -o "$out/.idx/dev.nix"
@@ -50,6 +50,9 @@ j2 ./devNix.j2 -o "$out/.idx/dev.nix"
 [[ $kit != "api" ]] && bun ./patch-vite.ts "$out"
 
 cd "$out"
+
+pwd
+ls -la
 
 if [[ "$kit" != "api" ]]; then
     echo "" >> .env.example
@@ -61,6 +64,11 @@ if [[ "$kit" != "api" ]]; then
 fi
 
 cp .env.example .env
-sed -i 's/\("php": "[^0-9]*\)8\.[0-9]\+/\18.4/' composer.json
+
 composer setup
-composer update
+if [[ "$kit" != "wave" ]]; then
+    sed -i 's/\("php": "[^0-9]*\)8\.[0-9]\+/\18.4/' composer.json
+    composer update
+fi
+
+[[ $kit == "filament" ]] && composer require filament/filament && php artisan filament:install --panels
